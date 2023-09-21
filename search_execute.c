@@ -19,7 +19,7 @@ void search_execute(char *input, stack_t **stack, int line_number)
 	int i;
 	int ret, zero_flag;
 	char *numeral, *operation;
-	
+
 	flag.err_flag = 0;
 	for (i = 0, zero_flag = 0; input[i] != '\0' && !zero_flag; i++)
 		if (input[i] == '0')
@@ -33,7 +33,7 @@ void search_execute(char *input, stack_t **stack, int line_number)
 	numeral = strtok(NULL, " \n");
 	flag.n = (numeral != NULL) ? atoi(numeral) : 0;
 	ret = strcmp("push", operation);
-	flag.err_flag = (ret == 0 && zero_flag== 0 && flag.n == 0) ? 1 : 0;
+	flag.err_flag = (ret == 0 && zero_flag == 0 && flag.n == 0) ? 1 : 0;
 	i = 0;
 	while (functions[i].opcode != NULL)
 	{

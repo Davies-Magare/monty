@@ -7,7 +7,7 @@
  *
  * Return: Nothing.
  */
-void push(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void push(stack_t **stack, unsigned int line_number)
 {
 	int n;
 	stack_t *new;
@@ -24,19 +24,19 @@ void push(stack_t **stack, __attribute__((unused))unsigned int line_number)
 			free(new);
 			exit(EXIT_FAILURE);
 		}
-	
+
 		new->n = n;
 		new->prev = NULL;
 		new->next = NULL;
 		if (*stack == NULL)
 			*stack = new;
 		else
-		{	
+		{
 			new->next = *stack;
 			(*stack)->prev = new;
 			*stack = new;
 		}
-	}	
+	}
 }
 /**
  * pall - prints all the elements on the stack
@@ -63,7 +63,7 @@ void pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
  *
  * Return: Nothing
  */
-void pint(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void pint(stack_t **stack, unsigned int line_number)
 {
 	if (*stack == NULL)
 	{
