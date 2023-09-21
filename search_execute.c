@@ -8,42 +8,45 @@
  *
  * Return: 1 in case of error, Otherwise return 0
  */
-int search_execute(char *input, stack_t **stack, int line_number)
+void search_execute(char *input, stack_t **stack, int line_number)
 {
 	instruction_t functions[] = {
 		{"push", push},
 		{"pall", pall},
+		{"pint", pint},
 		{NULL, NULL}
 	};
-	char operation[40];
 	int i;
-	int result, ret;
-
-	result = sscanf(input, "%s%i", operation, &global_n);
-	if (result == -1)
-		return (-1);
-	ret = strcmp("pall", operation);
-	if (result != 2 && ret != 0)
+	int ret, zero_flag;
+	char *numeral, *operation;
+	
+	flag.err_flag = 0;
+	for (i = 0, zero_flag = 0; input[i] != '\0' && !zero_flag; i++)
+		if (input[i] == '0')
+			zero_flag = 1;
+	operation = strtok(input, " \n");
+	if (operation == NULL)
 	{
-		fprintf(stderr, "L<%i>: usage: push integer\n", line_number);
-		return (1);
+		flag.err_flag = -1;
+		return;
 	}
+	numeral = strtok(NULL, " \n");
+	flag.n = (numeral != NULL) ? atoi(numeral) : 0;
+	ret = strcmp("push", operation);
+	flag.err_flag = (ret == 0 && zero_flag== 0 && flag.n == 0) ? 1 : 0;
 	i = 0;
 	while (functions[i].opcode != NULL)
 	{
 		if ((strcmp(functions[i].opcode, operation) == 0))
-		{
 			break;
-		}
 		i++;
 	}
 	if (functions[i].opcode == NULL)
 	{
 		fprintf(stderr, "L<%i>: unknown instruction<%s>\n", line_number, operation);
-		return (1);
+		flag.err_flag = 1;
 	}
 	functions[i].f(stack, line_number);
-	return (0);
 }
 /**
  * free_stack - frees the stack

@@ -13,7 +13,6 @@ int main(int argc, char *argv[])
 	stack_t *stack = NULL;
 	int line_number;
 	FILE *file;
-	int err_flag;
 
 	if (argc != 2)
 	{
@@ -27,17 +26,16 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	line_number = 1;
-	err_flag = 0;
 	while ((getline(&input, &n_read, file) != -1))
 	{
-		err_flag = search_execute(input, &stack, line_number);
+		search_execute(input, &stack, line_number);
 		line_number++;
-		if (err_flag == 1)
+		if (flag.err_flag == 1)
 			break;
-		else if (err_flag == -1)
+		else if (flag.err_flag == -1)
 			continue;
 	}
-	if (err_flag)
+	if (flag.err_flag)
 	{
 		cleanup(file, input, stack);
 		exit(EXIT_FAILURE);

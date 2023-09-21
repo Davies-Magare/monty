@@ -34,10 +34,25 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+/**
+ * struct flag_s - data and error flag
+ * @data: The number to pass to the stack
+ * @err_flag: A flag to indicate an error
+ *
+ * Description: Data and flag for
+ * for stack, queues, LIFO, FIFO
+ */
+typedef struct flag_s
+{
+	int n;
+	int err_flag;
+} flag_t;
+flag_t flag;
 int global_n;
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
-int search_execute(char *input, stack_t **stack, int line_number);
+void search_execute(char *input, stack_t **stack, int line_number);
 void free_stack(stack_t *stack);
 void cleanup(FILE *file, char *input, stack_t *stack);
+void pint(stack_t **stack, __attribute__((unused))unsigned int line_number);
 #endif
