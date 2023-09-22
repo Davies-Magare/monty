@@ -14,7 +14,7 @@ void push(stack_t **stack, unsigned int line_number)
 
 	n = flag.n;
 	if (flag.err_flag)
-		fprintf(stderr, "L %i: usage: push integer\n", line_number);
+		fprintf(stderr, "L%i: usage:push integer\n", line_number);
 	else
 	{
 		new = malloc(sizeof(stack_t));
@@ -68,7 +68,7 @@ void pint(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL)
 	{
 		flag.err_flag = 1;
-		fprintf(stderr, "L%i:can't pint, stack empty\n", line_number);
+		fprintf(stderr, "L%i: can't pint, stack empty\n", line_number);
 	}
 	else
 		printf("%i\n", (*stack)->n);

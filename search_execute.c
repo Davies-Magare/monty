@@ -35,7 +35,7 @@ void search_execute(char *input, stack_t **stack, int line_number)
 	}
 	if (functions[i].opcode == NULL)
 	{
-		fprintf(stderr, "L%i:unknown instruction %s\n", line_number, operation);
+		fprintf(stderr, "L%i: unknown instruction %s\n", line_number, operation);
 		flag.err_flag = 1;
 	}
 	functions[i].f(stack, line_number);
