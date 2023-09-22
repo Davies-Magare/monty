@@ -67,6 +67,7 @@ void(*choose(char *operation))(stack_t **, unsigned int)
 		{"add", add},
 		{"nop", nop},
 		{"sub", sub},
+		{"div", div_func},
 		{NULL, NULL}
 	};
 	int i;

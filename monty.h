@@ -2,9 +2,10 @@
 #define MONTY_H	
 #define _GNU_SOURCE
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <stddef.h>
+#include <stdlib.h>
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -49,6 +50,7 @@ typedef struct flag_s
 } flag_t;
 flag_t flag;
 int global_n;
+
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void search_execute(char *input, stack_t **stack, int line_number);
@@ -61,4 +63,5 @@ void swap(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
 void sub(stack_t **stack, unsigned int line_number);
+void div_func(stack_t **stack, unsigned int line_number);
 #endif
