@@ -23,6 +23,9 @@ void search_execute(char *input, stack_t **stack, int line_number)
 
 	flag.err_flag = 0;
 	result = sscanf(input, "%s%i", operation, &i);
+	flag.err_flag = (result == -1) ? -1 : 0;
+	if (flag.err_flag == -1)
+		return;
 	flag.n = i;
 	ret = strcmp("push", operation);
 	flag.err_flag = (ret == 0 && result != 2) ? 1 : 0;
