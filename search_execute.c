@@ -17,7 +17,7 @@ void search_execute(char *input, stack_t **stack, int line_number)
 
 	flag.err_flag = 0;
 	result = sscanf(input, "%s%i%s%i", operation, &i, op2, &j);
-	flag.err_flag = (result == -1) ? -1 : 0;
+	flag.err_flag = (result == -1 || operation[0] == '#') ? -1 : 0;
 	if (flag.err_flag == -1)
 		return;
 	flag.n = i;
@@ -68,6 +68,8 @@ void(*choose(char *operation))(stack_t **, unsigned int)
 		{"nop", nop},
 		{"sub", sub},
 		{"div", div_func},
+		{"mul", mul_func},
+		{"mod", mod_func},
 		{NULL, NULL}
 	};
 	int i;
