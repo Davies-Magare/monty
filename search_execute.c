@@ -17,12 +17,12 @@ void search_execute(char *input, stack_t **stack, int line_number)
 		{"pop", pop},
 		{NULL, NULL}
 	};
-	int i;
+	int i, j;
 	int ret, result;
-	char operation[40];
+	char operation[40], op2[30];
 
 	flag.err_flag = 0;
-	result = sscanf(input, "%s%i", operation, &i);
+	result = sscanf(input, "%s%i%s%i", operation, &i, op2, &j);
 	flag.err_flag = (result == -1) ? -1 : 0;
 	if (flag.err_flag == -1)
 		return;
