@@ -70,6 +70,7 @@ void(*choose(char *operation))(stack_t **, unsigned int)
 		{"div", div_func},
 		{"mul", mul_func},
 		{"mod", mod_func},
+		{"pchar", pchar},
 		{NULL, NULL}
 	};
 	int i;

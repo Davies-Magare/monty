@@ -48,3 +48,29 @@ void mod_func(stack_t **stack, unsigned int line_number)
 		pop(stack, line_number);
 	}
 }
+/**
+ * pchar - prints the char on top of the stack followed
+ * by a new line
+ * @stack: The stack
+ * @line_number: The file line number
+ *
+ * Return: Nothing
+ */
+void pchar(stack_t **stack, unsigned int line_number)
+{
+	if (*stack == NULL)
+	{
+		flag.err_flag = 1;
+		fprintf(stderr, "L%i: can't pchar, stack empty\n", line_number);
+	}
+	else if (isascii((*stack)->n) == 0)
+	{
+		flag.err_flag = 1;
+		fprintf(stderr, "L%i: can't pchar, value out of range\n", line_number);
+	}
+	else
+	{
+		putchar((*stack)->n);
+		putchar('\n');
+	}
+}
