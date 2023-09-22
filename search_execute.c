@@ -40,6 +40,7 @@ void search_execute(char *input, stack_t **stack, int line_number)
 	{
 		fprintf(stderr, "L%i: unknown instruction %s\n", line_number, operation);
 		flag.err_flag = 1;
+		return;
 	}
 	functions[i].f(stack, line_number);
 }
