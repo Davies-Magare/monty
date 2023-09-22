@@ -14,7 +14,7 @@ void push(stack_t **stack, unsigned int line_number)
 
 	n = flag.n;
 	if (flag.err_flag)
-		fprintf(stderr, "L%i:usage:push integer\n", line_number);
+		fprintf(stderr, "L%i: usage: push integer\n", line_number);
 	else
 	{
 		new = malloc(sizeof(stack_t));
