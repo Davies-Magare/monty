@@ -10,13 +10,7 @@
  */
 void search_execute(char *input, stack_t **stack, int line_number)
 {
-	instruction_t functions[] = {
-		{"push", push},
-		{"pall", pall},
-		{"pint", pint},
-		{"pop", pop},
-		{NULL, NULL}
-	};
+	void(*func)(stack_t **, unsigned int);
 	int i, j;
 	int ret, result;
 	char operation[40], op2[30];
@@ -29,20 +23,14 @@ void search_execute(char *input, stack_t **stack, int line_number)
 	flag.n = i;
 	ret = strcmp("push", operation);
 	flag.err_flag = (ret == 0 && result != 2) ? 1 : 0;
-	i = 0;
-	while (functions[i].opcode != NULL)
-	{
-		if ((strcmp(functions[i].opcode, operation) == 0))
-			break;
-		i++;
-	}
-	if (functions[i].opcode == NULL)
+	func = choose(operation);
+	if (func == NULL)
 	{
 		fprintf(stderr, "L%i: unknown instruction %s\n", line_number, operation);
 		flag.err_flag = 1;
 		return;
 	}
-	functions[i].f(stack, line_number);
+	func(stack, line_number);
 }
 /**
  * free_stack - frees the stack
@@ -62,3 +50,29 @@ void free_stack(stack_t *stack)
 	}
 }
 
+/**
+ * choose_func - chooses the function to execute
+ *
+ *
+ * Return: A pointer to the function to execute
+ */
+void(*choose(char *operation))(stack_t **, unsigned int)
+{
+	instruction_t functions[] = {
+		{"push", push},
+		{"pall", pall},
+		{"pint", pint},
+		{"pop", pop},
+		{"swap", swap},
+		{NULL, NULL}
+	};
+	int i;
+	i = 0;
+	while(functions[i].opcode != NULL)
+	{
+		if ((strcmp(functions[i].opcode, operation) == 0))
+			break;
+		i++;
+	}
+	return (functions[i].f);
+}

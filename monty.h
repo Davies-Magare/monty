@@ -56,4 +56,6 @@ void free_stack(stack_t *stack);
 void cleanup(FILE *file, char *input, stack_t *stack);
 void pint(stack_t **stack, __attribute__((unused))unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
+void(*choose(char *operation))(stack_t **, unsigned int);
+void swap(stack_t **stack, unsigned int line_number);
 #endif
