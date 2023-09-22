@@ -10,7 +10,7 @@
  */
 void search_execute(char *input, stack_t **stack, int line_number)
 {
-	void(*func)(stack_t **, unsigned int);
+	void (*func)(stack_t **, unsigned int);
 	int i, j;
 	int ret, result;
 	char operation[40], op2[30];
@@ -51,8 +51,8 @@ void free_stack(stack_t *stack)
 }
 
 /**
- * choose_func - chooses the function to execute
- *
+ * choose - chooses the function to execute
+ * @operation: The function to look for
  *
  * Return: A pointer to the function to execute
  */
@@ -67,8 +67,9 @@ void(*choose(char *operation))(stack_t **, unsigned int)
 		{NULL, NULL}
 	};
 	int i;
+
 	i = 0;
-	while(functions[i].opcode != NULL)
+	while (functions[i].opcode != NULL)
 	{
 		if ((strcmp(functions[i].opcode, operation) == 0))
 			break;
