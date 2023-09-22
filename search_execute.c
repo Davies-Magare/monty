@@ -14,26 +14,18 @@ void search_execute(char *input, stack_t **stack, int line_number)
 		{"push", push},
 		{"pall", pall},
 		{"pint", pint},
+		{"pop", pop},
 		{NULL, NULL}
 	};
 	int i;
-	int ret, zero_flag;
-	char *numeral, *operation;
+	int ret, result;
+	char operation[40];
 
 	flag.err_flag = 0;
-	for (i = 0, zero_flag = 0; input[i] != '\0' && !zero_flag; i++)
-		if (input[i] == '0')
-			zero_flag = 1;
-	operation = strtok(input, " \n");
-	if (operation == NULL)
-	{
-		flag.err_flag = -1;
-		return;
-	}
-	numeral = strtok(NULL, " \n");
-	flag.n = (numeral != NULL) ? atoi(numeral) : 0;
+	result = sscanf(input, "%s%i", operation, &i);
+	flag.n = i;
 	ret = strcmp("push", operation);
-	flag.err_flag = (ret == 0 && zero_flag == 0 && flag.n == 0) ? 1 : 0;
+	flag.err_flag = (ret == 0 && result != 2) ? 1 : 0;
 	i = 0;
 	while (functions[i].opcode != NULL)
 	{
@@ -43,7 +35,7 @@ void search_execute(char *input, stack_t **stack, int line_number)
 	}
 	if (functions[i].opcode == NULL)
 	{
-		fprintf(stderr, "L<%i>: unknown instruction<%s>\n", line_number, operation);
+		fprintf(stderr, "L %i: unknown instruction %s\n", line_number, operation);
 		flag.err_flag = 1;
 	}
 	functions[i].f(stack, line_number);
